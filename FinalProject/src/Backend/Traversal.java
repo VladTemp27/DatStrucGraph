@@ -78,4 +78,31 @@ public class Traversal {
         return shortestPathVertices.toString();
     } // end of getShortestPathVertices
 
+    // BFS Traversal
+    public String BFSTraversal(int id) {
+        // Initialize variables
+        StringBuilder result = new StringBuilder(); // Stores the traversal result
+        Vertex vertex = getVertex(id); // Get starting vertex
+        Set<Vertex> verticesVisited = new HashSet<>(); // Track visited vertices
+        LinkedList<Vertex> queue = new LinkedList<>(); // Queue for BFS traversal
+
+        // Add starting vertex to queue and mark it visited
+        queue.add(vertex);
+        verticesVisited.add(vertex);
+
+        // Perform BFS traversal while queue is not empty
+        while (!queue.isEmpty()) {
+            vertex = queue.poll(); // Dequeue and process current vertex
+            result.append(vertex).append(" "); // Add vertex to result
+
+            // Explore adjacent vertices
+            for (Edge edge : vertex.getAdjacencyList()) { // Get adjacent vertex
+                if (!verticesVisited.contains(edge.getEnd())) { // If not visited mark visited
+                    verticesVisited.add(edge.getEnd());
+                    queue.add(edge.getEnd()); // Add to queue for further exploration
+                }
+            }
+        }
+        return result.toString();
+    } // end of BFSTraversal
 }
