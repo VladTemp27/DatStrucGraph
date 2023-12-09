@@ -58,4 +58,3 @@ public class Vertex {
     }
 
 } // end of Vertex class
-

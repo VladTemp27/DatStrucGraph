@@ -1,6 +1,10 @@
 package Backend;
 
 import java.text.DecimalFormat;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
+import java.util.Stack;
 import java.util.*;
 
 public class Traversal {
@@ -105,4 +109,33 @@ public class Traversal {
         }
         return result.toString();
     } // end of BFSTraversal
-}
+
+    // DFS Traversal
+    public String DFSTraversal(int id) {
+        // Initialize variables
+        StringBuilder result = new StringBuilder(); // Stores the traversal result
+        Vertex vertex = getVertex(id); // Get starting vertex
+        Set<Vertex> verticesVisited = new HashSet<>(); // Track visited vertices
+        Stack<Vertex> stack = new Stack<>(); // Stack for DFS traversal
+
+        // Add starting vertex to stack and mark it visited
+        stack.push(vertex);
+        verticesVisited.add(vertex);
+
+        // Perform DFS traversal while stack is not empty
+        while (!stack.isEmpty()) {
+            vertex = stack.pop(); // Pop and process current vertex
+            result.append(vertex).append(" "); // Add vertex to result
+
+            // Explore adjacent vertices
+            for (Edge edge : vertex.getAdjacencyList()) { // Get adjacent vertex
+                if (!verticesVisited.contains(edge.getEnd())) { // If not visited mark visited
+                    verticesVisited.add(edge.getEnd());
+                    stack.push(edge.getEnd()); // Push to stack for further exploration
+                }
+            }
+        }
+        return result.toString();
+    } // end of DFSTraversal
+
+} // end of Traversal class
