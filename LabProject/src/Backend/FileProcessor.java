@@ -7,13 +7,12 @@ import java.util.Scanner;
 
 public class FileProcessor {
 
-    public Graph fetchFromFile(String localPath){
+    public Graph fetchFromFile(String localPath) throws FileNotFoundException{
         File graphFile = new File(localPath);
         Graph outputGraph = new Graph();
 
         ArrayList<Edge> edgeList = new ArrayList<Edge>();
         ArrayList<Vertex> vertexList = new ArrayList<Vertex>();
-        try{
             Scanner fileRead = new Scanner(graphFile);
             while(fileRead.hasNext()){
                 String[] fetchedEdges = fileRead.next().split(",");
@@ -35,12 +34,6 @@ public class FileProcessor {
             }
 
             return outputGraph;
-
-
-        }catch(FileNotFoundException fileNotFound){
-            fileNotFound.printStackTrace();
-        }
-        return null;
     }
 
     private void addToVertexList(ArrayList<Vertex> vertexList, Vertex vertex, Edge edge){
