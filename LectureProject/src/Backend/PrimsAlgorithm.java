@@ -3,21 +3,21 @@ package Backend;
 import java.util.*;
 
 public class PrimsAlgorithm {
-    public static List<Edge> prim(List<Edge> edges, List<Vertex> vertices) {
-        List<Edge> minimumSpanningTree = new ArrayList<>();
-        Set<Vertex> visitedVertices = new HashSet<>();
+    public static List<EdgeLEC> prim(List<EdgeLEC> edges, List<VertexLEC> vertices) {
+        List<EdgeLEC> minimumSpanningTree = new ArrayList<>();
+        Set<VertexLEC> visitedVertices = new HashSet<>();
 
         // Choose a starting vertex (for example, the first one)
-        Vertex startVertex = vertices.get(0);
+        VertexLEC startVertex = vertices.get(0);
         visitedVertices.add(startVertex);
 
-        PriorityQueue<Edge> priorityQueue = new PriorityQueue<>(Comparator.comparingDouble(Edge::getWeight));
+        PriorityQueue<EdgeLEC> priorityQueue = new PriorityQueue<>(Comparator.comparingDouble(EdgeLEC::getWeight));
         priorityQueue.addAll(getEdgesForVertex(edges, startVertex));
 
         while (!priorityQueue.isEmpty()) {
-            Edge currentEdge = priorityQueue.poll();
+            EdgeLEC currentEdge = priorityQueue.poll();
 
-            Vertex nextVertex = currentEdge.getEnd();
+            VertexLEC nextVertex = currentEdge.getEnd();
             if (!visitedVertices.contains(nextVertex)) {
                 visitedVertices.add(nextVertex);
                 minimumSpanningTree.add(currentEdge);
@@ -30,9 +30,9 @@ public class PrimsAlgorithm {
         return minimumSpanningTree;
     }
 
-    private static List<Edge> getEdgesForVertex(List<Edge> edges, Vertex vertex) {
-        List<Edge> edgesForVertex = new ArrayList<>();
-        for (Edge edge : edges) {
+    private static List<EdgeLEC> getEdgesForVertex(List<EdgeLEC> edges, VertexLEC vertex) {
+        List<EdgeLEC> edgesForVertex = new ArrayList<>();
+        for (EdgeLEC edge : edges) {
             if (edge.getStart().equals(vertex) || edge.getEnd().equals(vertex)) {
                 edgesForVertex.add(edge);
             }
@@ -40,4 +40,3 @@ public class PrimsAlgorithm {
         return edgesForVertex;
     }
 }
-

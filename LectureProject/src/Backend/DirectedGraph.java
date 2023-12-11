@@ -29,4 +29,3 @@ public class DirectedGraph {
         return adjacencyList.getOrDefault(vertex, new ArrayList<>());
     }
 }
-
