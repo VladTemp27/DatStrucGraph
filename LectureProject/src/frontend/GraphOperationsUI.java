@@ -1,4 +1,4 @@
-package Frontend;
+package frontend;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ public class GraphOperationsUI {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {
-                PathOperationsUI window = new PathOperationsUI();
+                GraphOperationsUI window = new GraphOperationsUI();
                 window.frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
