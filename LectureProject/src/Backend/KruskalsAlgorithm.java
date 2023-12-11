@@ -6,7 +6,7 @@ import java.util.List;
 
 public class KruskalsAlgorithm {
     public static List<EdgeLEC> kruskalsAlgorithm(List<EdgeLEC> edges, List<VertexLEC> vertices) {
-        List<EdgeLEC> mutableEdges = new ArrayList<>(List.copyOf(edges)); // Create a mutable copy
+        List<EdgeLEC> mutableEdges = new ArrayList<>(List.copyOf(edges));
 
         List<EdgeLEC> minimumSpanningTree = new ArrayList<>();
         DisjointSet disjointSet = new DisjointSet();
