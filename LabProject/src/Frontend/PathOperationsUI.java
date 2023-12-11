@@ -92,7 +92,7 @@ public class PathOperationsUI {
     private void performDepthFirstTraversal() {
         // Implement logic for Depth First Traversal
         int startVertex = Integer.parseInt(JOptionPane.showInputDialog(frame, "Enter start vertex"));
-        JOptionPane.showMessageDialog(frame, "Traversal Result: ");
+        JOptionPane.showMessageDialog(frame, "Traversal Result: "+traverser.DFSTraversal(startVertex));
     }
 
     private void performBreadthFirstTraversal() {
