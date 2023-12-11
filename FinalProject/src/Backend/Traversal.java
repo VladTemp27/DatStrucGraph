@@ -9,12 +9,12 @@ import java.util.*;
 
 public class Traversal {
 
-    private final List<Vertex> vertexList;
+    private final Graph graph;
     private StringBuilder shortestPathVertices;
 
     public Traversal(Graph graph) {
-        vertexList = graph.getVertexList();
-    } // end of constructor
+        this.graph = graph;
+    }
 
     // Shortest Path
     public String shortestPath(int sourceId, int destinationId) {
@@ -57,7 +57,7 @@ public class Traversal {
             return shortestPath + "";
         }
         return "There is no path from " + sourceId + " to " + destinationId;
-    } // end of shortestPath
+    }
 
     // Helper method to construct shortest path
     private void constructShortestPath(Map<Vertex, Vertex> previousVertexMap, Vertex destination) {
@@ -67,20 +67,20 @@ public class Traversal {
             shortestPathVertices.insert(0, current + " ");
             current = previousVertexMap.get(current);
         }
-    } // end of constructShortestPath
+    }
 
     // Helper method to get a vertex by ID
     private Vertex getVertex(int id) {
-        return vertexList.stream()
+        return graph.getVertexList().stream()
                 .filter(vertex -> vertex.getId() == id)
                 .findFirst()
                 .orElse(null);
-    } // end of getVertex
+    }
 
     // Getter for shortest path vertices
     public String getShortestPathVertices() {
         return shortestPathVertices.toString();
-    } // end of getShortestPathVertices
+    }
 
     // BFS Traversal
     public String BFSTraversal(int id) {
@@ -108,7 +108,7 @@ public class Traversal {
             }
         }
         return result.toString();
-    } // end of BFSTraversal
+    }
 
     // DFS Traversal
     public String DFSTraversal(int id) {
@@ -136,6 +136,5 @@ public class Traversal {
             }
         }
         return result.toString();
-    } // end of DFSTraversal
-
+    } // end of DFSTraversal method
 } // end of Traversal class
