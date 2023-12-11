@@ -1,9 +1,16 @@
 package Frontend;
 
+import Backend.*;
+
+import static Backend.BreadthFirstTraversal.breadthFirstTraversal;
+import static Backend.DepthFirstTraversal.depthFirstTraversal;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Map;
 
 public class GraphOperationsUI {
     private JFrame frame;
@@ -12,7 +19,7 @@ public class GraphOperationsUI {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {
-                PathOperationsUI window = new PathOperationsUI();
+                GraphOperationsUI window = new GraphOperationsUI();
                 window.frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -51,41 +58,186 @@ public class GraphOperationsUI {
 
     private void performDirectedGraphOperation(ActionEvent e) {
         // Implement logic for Directed Graph operation
-        JOptionPane.showMessageDialog(frame, "Directed Graph Operation");
+        DirectedGraph directedGraph = new DirectedGraph();
+
+        // Adding vertices
+        directedGraph.addVertex("A");
+        directedGraph.addVertex("B");
+        directedGraph.addVertex("C");
+
+        // Adding edges
+        directedGraph.addEdge("A", "B");
+        directedGraph.addEdge("B", "C");
+        directedGraph.addEdge("C", "A");
+
+        // Performing some operation, e.g., getting neighbors of a vertex
+        List<String> neighborsOfA = directedGraph.getNeighbors("A");
+        String outputMessage = "Directed Graph Operation\nNeighbors of A: " + neighborsOfA + "\n";
+        JOptionPane.showMessageDialog(frame, outputMessage);
     }
 
     private void performUndirectedGraphOperation(ActionEvent e) {
         // Implement logic for Undirected Graph operation
-        JOptionPane.showMessageDialog(frame, "Undirected Graph Operation");
+        UndirectedGraph undirectedGraph = new UndirectedGraph();
+
+        // Adding vertices
+        undirectedGraph.addVertex("A");
+        undirectedGraph.addVertex("B");
+        undirectedGraph.addVertex("C");
+
+        // Adding edges
+        undirectedGraph.addEdge("A", "B");
+        undirectedGraph.addEdge("B", "C");
+        undirectedGraph.addEdge("C", "A");
+
+        // Performing some operation, e.g., getting neighbors of a vertex
+        List<String> neighborsOfA = undirectedGraph.getNeighbors("A");
+        String outputMessage = "Undirected Graph Operation\nNeighbors of A: " + neighborsOfA + "\n";
+        JOptionPane.showMessageDialog(frame, outputMessage);
     }
 
     private void performDepthFirstTraversal(ActionEvent e) {
         // Implement logic for Depth-First Traversal operation
-        JOptionPane.showMessageDialog(frame, "Depth-First Traversal Operation");
+        UndirectedGraph undirectedGraph = new UndirectedGraph();
+
+        // Adding vertices
+        undirectedGraph.addVertex("A");
+        undirectedGraph.addVertex("B");
+        undirectedGraph.addVertex("C");
+        undirectedGraph.addVertex("D");
+
+        // Adding edges
+        undirectedGraph.addEdge("A", "B");
+        undirectedGraph.addEdge("B", "C");
+        undirectedGraph.addEdge("C", "A");
+        undirectedGraph.addEdge("C", "D");
+
+        // Performing Depth-First Traversal
+        List<String> traversalResult = depthFirstTraversal(undirectedGraph, "A");
+        String outputMessage = "Depth-First Traversal Operation\nResult: " + traversalResult + "\n";
+        JOptionPane.showMessageDialog(frame, outputMessage);
     }
 
     private void performBreadthFirstTraversal(ActionEvent e) {
         // Implement logic for Breadth-First Traversal operation
-        JOptionPane.showMessageDialog(frame, "Breadth-First Traversal Operation");
+        UndirectedGraph undirectedGraph = new UndirectedGraph();
+
+        // Adding vertices
+        undirectedGraph.addVertex("A");
+        undirectedGraph.addVertex("B");
+        undirectedGraph.addVertex("C");
+        undirectedGraph.addVertex("D");
+
+        // Adding edges
+        undirectedGraph.addEdge("A", "B");
+        undirectedGraph.addEdge("B", "C");
+        undirectedGraph.addEdge("C", "A");
+        undirectedGraph.addEdge("C", "D");
+
+        // Performing Breadth-First Traversal
+        List<String> traversalResult = breadthFirstTraversal(undirectedGraph, "A");
+        String outputMessage = "Breadth-First Traversal Operation\nResult: " + traversalResult + "\n";
+        JOptionPane.showMessageDialog(frame, outputMessage);
     }
 
     private void performDijkstraAlgorithm(ActionEvent e) {
         // Implement logic for Dijkstra's Algorithm operation
-        JOptionPane.showMessageDialog(frame, "Dijkstra's Algorithm Operation");
+        UndirectedWeightedGraph weightedGraph = new UndirectedWeightedGraph();
+
+        // Adding vertices
+        weightedGraph.addVertex("A");
+        weightedGraph.addVertex("B");
+        weightedGraph.addVertex("C");
+        weightedGraph.addVertex("D");
+
+        // Adding weighted edges
+        weightedGraph.addEdge("A", "B", 2);
+        weightedGraph.addEdge("B", "C", 1);
+        weightedGraph.addEdge("C", "A", 4);
+        weightedGraph.addEdge("C", "D", 3);
+
+        // Performing Dijkstra's Algorithm using the DijkstraAlgorithm class
+        Map<String, Integer> shortestDistances = DijkstraAlgorithm.dijkstra(weightedGraph, "A");
+        String outputMessage = "Dijkstra's Algorithm Operation\nShortest Distances from A: " + shortestDistances + "\n";
+        JOptionPane.showMessageDialog(frame, outputMessage);
     }
 
     private void performPrimsAlgorithm(ActionEvent e) {
         // Implement logic for Prim's Algorithm operation
-        JOptionPane.showMessageDialog(frame, "Prim's Algorithm Operation");
+        UndirectedWeightedGraph weightedGraph = new UndirectedWeightedGraph();
+
+        // Create vertices
+        Vertex vertexA = new Vertex(1);
+        Vertex vertexB = new Vertex(2);
+        Vertex vertexC = new Vertex(3);
+        Vertex vertexD = new Vertex(4);
+
+        // Create edges
+        Edge edgeAB = new Edge(vertexA, vertexB, 2, 1);
+        Edge edgeBC = new Edge(vertexB, vertexC, 1, 2);
+        Edge edgeCA = new Edge(vertexC, vertexA, 4, 3);
+        Edge edgeCD = new Edge(vertexC, vertexD, 3, 4);
+
+        // Create a list of edges
+        List<Edge> edges = List.of(edgeAB, edgeBC, edgeCA, edgeCD);
+
+        // Create a list of vertices
+        List<Vertex> vertices = List.of(vertexA, vertexB, vertexC, vertexD);
+
+        // Performing Prim's Algorithm using the PrimAlgorithm class
+        List<Edge> minimumSpanningTree = PrimsAlgorithm.prim(edges, vertices);
+        String outputMessage = "Prim's Algorithm Operation\nMinimum Spanning Tree: " + minimumSpanningTree + "\n";
+        JOptionPane.showMessageDialog(frame, outputMessage);
     }
 
     private void performKruskalsAlgorithm(ActionEvent e) {
         // Implement logic for Kruskal's Algorithm operation
-        JOptionPane.showMessageDialog(frame, "Kruskal's Algorithm Operation");
+
+        // Create vertices
+        Vertex vertexA = new Vertex(1);
+        Vertex vertexB = new Vertex(2);
+        Vertex vertexC = new Vertex(3);
+        Vertex vertexD = new Vertex(4);
+
+        // Create edges
+        Edge edgeAB = new Edge(vertexA, vertexB, 2, 1);
+        Edge edgeBC = new Edge(vertexB, vertexC, 1, 2);
+        Edge edgeCA = new Edge(vertexC, vertexA, 4, 3);
+        Edge edgeCD = new Edge(vertexC, vertexD, 3, 4);
+
+        // Create a list of edges
+        List<Edge> edges = List.of(edgeAB, edgeBC, edgeCA, edgeCD);
+
+        // Create a list of vertices
+        List<Vertex> vertices = List.of(vertexA, vertexB, vertexC, vertexD);
+
+        // Perform Kruskal's Algorithm using the KruskalsAlgorithm class
+        List<Edge> minimumSpanningTree = KruskalsAlgorithm.kruskalsAlgorithm(edges, vertices);
+        String outputMessage = "Kruskal's Algorithm Operation\nMinimum Spanning Tree: " + minimumSpanningTree + "\n";
+        JOptionPane.showMessageDialog(frame, outputMessage);
     }
 
     private void performGraphColoring(ActionEvent e) {
         // Implement logic for Graph Coloring operation
-        JOptionPane.showMessageDialog(frame, "Graph Coloring Operation");
+
+        // Create vertices
+        Vertex vertexA = new Vertex(1);
+        Vertex vertexB = new Vertex(2);
+        Vertex vertexC = new Vertex(3);
+        Vertex vertexD = new Vertex(4);
+
+        // Create a list of vertices
+        List<Vertex> vertices = List.of(vertexA, vertexB, vertexC, vertexD);
+
+        // Perform graph coloring
+        Map<Vertex, Integer> vertexColors = GraphColoring.colorGraph(vertices);
+
+        // Outputting the results
+        StringBuilder outputMessage = new StringBuilder("Graph Coloring Operation\n");
+
+        for (Map.Entry<Vertex, Integer> entry : vertexColors.entrySet()) {
+            outputMessage.append("Vertex ").append(entry.getKey().getId()).append(" is colored with color ").append(entry.getValue()).append("\n");
+        }
+        JOptionPane.showMessageDialog(frame, outputMessage.toString());
     }
 }
