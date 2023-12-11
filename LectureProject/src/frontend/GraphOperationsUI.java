@@ -1,4 +1,4 @@
-package frontend;
+package Frontend;
 
 import Backend.*;
 
@@ -167,25 +167,25 @@ public class GraphOperationsUI {
         UndirectedWeightedGraph weightedGraph = new UndirectedWeightedGraph();
 
         // Create vertices
-        Vertex vertexA = new Vertex(1);
-        Vertex vertexB = new Vertex(2);
-        Vertex vertexC = new Vertex(3);
-        Vertex vertexD = new Vertex(4);
+        VertexLEC vertexA = new VertexLEC(1);
+        VertexLEC vertexB = new VertexLEC(2);
+        VertexLEC vertexC = new VertexLEC(3);
+        VertexLEC vertexD = new VertexLEC(4);
 
         // Create edges
-        Edge edgeAB = new Edge(vertexA, vertexB, 2, 1);
-        Edge edgeBC = new Edge(vertexB, vertexC, 1, 2);
-        Edge edgeCA = new Edge(vertexC, vertexA, 4, 3);
-        Edge edgeCD = new Edge(vertexC, vertexD, 3, 4);
+        EdgeLEC edgeAB = new EdgeLEC(vertexA, vertexB, 2, 1);
+        EdgeLEC edgeBC = new EdgeLEC(vertexB, vertexC, 1, 2);
+        EdgeLEC edgeCA = new EdgeLEC(vertexC, vertexA, 4, 3);
+        EdgeLEC edgeCD = new EdgeLEC(vertexC, vertexD, 3, 4);
 
         // Create a list of edges
-        List<Edge> edges = List.of(edgeAB, edgeBC, edgeCA, edgeCD);
+        List<EdgeLEC> edges = List.of(edgeAB, edgeBC, edgeCA, edgeCD);
 
         // Create a list of vertices
-        List<Vertex> vertices = List.of(vertexA, vertexB, vertexC, vertexD);
+        List<VertexLEC> vertices = List.of(vertexA, vertexB, vertexC, vertexD);
 
         // Performing Prim's Algorithm using the PrimAlgorithm class
-        List<Edge> minimumSpanningTree = PrimsAlgorithm.prim(edges, vertices);
+        List<EdgeLEC> minimumSpanningTree = PrimsAlgorithm.prim(edges, vertices);
         String outputMessage = "Prim's Algorithm Operation\nMinimum Spanning Tree: " + minimumSpanningTree + "\n";
         JOptionPane.showMessageDialog(frame, outputMessage);
     }
@@ -194,25 +194,25 @@ public class GraphOperationsUI {
         // Implement logic for Kruskal's Algorithm operation
 
         // Create vertices
-        Vertex vertexA = new Vertex(1);
-        Vertex vertexB = new Vertex(2);
-        Vertex vertexC = new Vertex(3);
-        Vertex vertexD = new Vertex(4);
+        VertexLEC vertexA = new VertexLEC(1);
+        VertexLEC vertexB = new VertexLEC(2);
+        VertexLEC vertexC = new VertexLEC(3);
+        VertexLEC vertexD = new VertexLEC(4);
 
         // Create edges
-        Edge edgeAB = new Edge(vertexA, vertexB, 2, 1);
-        Edge edgeBC = new Edge(vertexB, vertexC, 1, 2);
-        Edge edgeCA = new Edge(vertexC, vertexA, 4, 3);
-        Edge edgeCD = new Edge(vertexC, vertexD, 3, 4);
+        EdgeLEC edgeAB = new EdgeLEC(vertexA, vertexB, 2, 1);
+        EdgeLEC edgeBC = new EdgeLEC(vertexB, vertexC, 1, 2);
+        EdgeLEC edgeCA = new EdgeLEC(vertexC, vertexA, 4, 3);
+        EdgeLEC edgeCD = new EdgeLEC(vertexC, vertexD, 3, 4);
 
         // Create a list of edges
-        List<Edge> edges = List.of(edgeAB, edgeBC, edgeCA, edgeCD);
+        List<EdgeLEC> edges = List.of(edgeAB, edgeBC, edgeCA, edgeCD);
 
         // Create a list of vertices
-        List<Vertex> vertices = List.of(vertexA, vertexB, vertexC, vertexD);
+        List<VertexLEC> vertices = List.of(vertexA, vertexB, vertexC, vertexD);
 
         // Perform Kruskal's Algorithm using the KruskalsAlgorithm class
-        List<Edge> minimumSpanningTree = KruskalsAlgorithm.kruskalsAlgorithm(edges, vertices);
+        List<EdgeLEC> minimumSpanningTree = KruskalsAlgorithm.kruskalsAlgorithm(edges, vertices);
         String outputMessage = "Kruskal's Algorithm Operation\nMinimum Spanning Tree: " + minimumSpanningTree + "\n";
         JOptionPane.showMessageDialog(frame, outputMessage);
     }
@@ -221,21 +221,21 @@ public class GraphOperationsUI {
         // Implement logic for Graph Coloring operation
 
         // Create vertices
-        Vertex vertexA = new Vertex(1);
-        Vertex vertexB = new Vertex(2);
-        Vertex vertexC = new Vertex(3);
-        Vertex vertexD = new Vertex(4);
+        VertexLEC vertexA = new VertexLEC(1);
+        VertexLEC vertexB = new VertexLEC(2);
+        VertexLEC vertexC = new VertexLEC(3);
+        VertexLEC vertexD = new VertexLEC(4);
 
         // Create a list of vertices
-        List<Vertex> vertices = List.of(vertexA, vertexB, vertexC, vertexD);
+        List<VertexLEC> vertices = List.of(vertexA, vertexB, vertexC, vertexD);
 
         // Perform graph coloring
-        Map<Vertex, Integer> vertexColors = GraphColoring.colorGraph(vertices);
+        Map<VertexLEC, Integer> vertexColors = GraphColoring.colorGraph(vertices);
 
         // Outputting the results
         StringBuilder outputMessage = new StringBuilder("Graph Coloring Operation\n");
 
-        for (Map.Entry<Vertex, Integer> entry : vertexColors.entrySet()) {
+        for (Map.Entry<VertexLEC, Integer> entry : vertexColors.entrySet()) {
             outputMessage.append("Vertex ").append(entry.getKey().getId()).append(" is colored with color ").append(entry.getValue()).append("\n");
         }
         JOptionPane.showMessageDialog(frame, outputMessage.toString());
