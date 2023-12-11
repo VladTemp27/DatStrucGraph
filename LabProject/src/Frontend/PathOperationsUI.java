@@ -1,12 +1,20 @@
 package Frontend;
 
+import Backend.FileProcessor;
+import Backend.Graph;
+import Backend.Traversal;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class PathOperationsUI {
     public JFrame frame;
+    Graph currentGraph;
+    Traversal traverser;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -71,17 +79,24 @@ public class PathOperationsUI {
 
     private void openLoadFilePanel() {
         // Implement logic for opening the Load File panel
-        JOptionPane.showMessageDialog(frame, "Load File Panel");
+        String fileName = JOptionPane.showInputDialog(frame, "Enter file name");
+        FileProcessor fileProcessor = new FileProcessor();
+        try {
+            currentGraph = fileProcessor.fetchFromFile("LabProject/src/input/" + fileName);
+            traverser = new Traversal(currentGraph);
+        }catch(FileNotFoundException fNFE){
+            JOptionPane.showMessageDialog(frame, "File does not exist");
+        }
     }
 
     private void performDepthFirstTraversal() {
         // Implement logic for Depth First Traversal
-        JOptionPane.showMessageDialog(frame, "Perform Depth First Traversal");
+        JOptionPane.showMessageDialog(frame, "Traversal Result: ");
     }
 
     private void performBreadthFirstTraversal() {
         // Implement logic for Breadth First Traversal
-        JOptionPane.showMessageDialog(frame, "Perform Breadth First Traversal");
+        JOptionPane.showMessageDialog(frame, "Breadth First Traversal: ");
     }
 
     private void showShortestPath() {
