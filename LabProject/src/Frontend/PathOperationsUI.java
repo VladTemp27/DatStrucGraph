@@ -91,16 +91,20 @@ public class PathOperationsUI {
 
     private void performDepthFirstTraversal() {
         // Implement logic for Depth First Traversal
+        int startVertex = Integer.parseInt(JOptionPane.showInputDialog(frame, "Enter start vertex"));
         JOptionPane.showMessageDialog(frame, "Traversal Result: ");
     }
 
     private void performBreadthFirstTraversal() {
         // Implement logic for Breadth First Traversal
-        JOptionPane.showMessageDialog(frame, "Breadth First Traversal: ");
+        int startVertex = Integer.parseInt(JOptionPane.showInputDialog(frame, "Enter start vertex"));
+        JOptionPane.showMessageDialog(frame, "Breadth First Traversal: "+traverser.BFSTraversal(startVertex));
     }
 
     private void showShortestPath() {
         // Implement logic for showing the shortest path
-        JOptionPane.showMessageDialog(frame, "Show Shortest Path");
+        int startVertex = Integer.parseInt(JOptionPane.showInputDialog(frame, "Enter start vertex"));
+        int endVertex = Integer.parseInt(JOptionPane.showInputDialog(frame,"Enter end vertex"));
+        JOptionPane.showMessageDialog(frame, "Shortest Path: "+traverser.shortestPath(startVertex,endVertex));
     }
 }
