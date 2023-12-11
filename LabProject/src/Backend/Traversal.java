@@ -1,16 +1,20 @@
 package Backend;
 
 import java.text.DecimalFormat;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
+import java.util.Stack;
 import java.util.*;
 
 public class Traversal {
 
-    private final List<Vertex> vertexList;
+    private final Graph graph;
     private StringBuilder shortestPathVertices;
 
     public Traversal(Graph graph) {
-        vertexList = graph.getVertexList();
-    } // end of constructor
+        this.graph = graph;
+    }
 
     // Shortest Path
     public String shortestPath(int sourceId, int destinationId) {
@@ -53,7 +57,7 @@ public class Traversal {
             return shortestPath + "";
         }
         return "There is no path from " + sourceId + " to " + destinationId;
-    } // end of shortestPath
+    }
 
     // Helper method to construct shortest path
     private void constructShortestPath(Map<Vertex, Vertex> previousVertexMap, Vertex destination) {
@@ -63,20 +67,20 @@ public class Traversal {
             shortestPathVertices.insert(0, current + " ");
             current = previousVertexMap.get(current);
         }
-    } // end of constructShortestPath
+    }
 
     // Helper method to get a vertex by ID
     private Vertex getVertex(int id) {
-        return vertexList.stream()
+        return graph.getVertexList().stream()
                 .filter(vertex -> vertex.getId() == id)
                 .findFirst()
                 .orElse(null);
-    } // end of getVertex
+    }
 
     // Getter for shortest path vertices
     public String getShortestPathVertices() {
         return shortestPathVertices.toString();
-    } // end of getShortestPathVertices
+    }
 
     // BFS Traversal
     public String BFSTraversal(int id) {
@@ -104,5 +108,33 @@ public class Traversal {
             }
         }
         return result.toString();
-    } // end of BFSTraversal
-}
+    }
+
+    // DFS Traversal
+    public String DFSTraversal(int id) {
+        // Initialize variables
+        StringBuilder result = new StringBuilder(); // Stores the traversal result
+        Vertex vertex = getVertex(id); // Get starting vertex
+        Set<Vertex> verticesVisited = new HashSet<>(); // Track visited vertices
+        Stack<Vertex> stack = new Stack<>(); // Stack for DFS traversal
+
+        // Add starting vertex to stack and mark it visited
+        stack.push(vertex);
+        verticesVisited.add(vertex);
+
+        // Perform DFS traversal while stack is not empty
+        while (!stack.isEmpty()) {
+            vertex = stack.pop(); // Pop and process current vertex
+            result.append(vertex).append(" "); // Add vertex to result
+
+            // Explore adjacent vertices
+            for (Edge edge : vertex.getAdjacencyList()) { // Get adjacent vertex
+                if (!verticesVisited.contains(edge.getEnd())) { // If not visited mark visited
+                    verticesVisited.add(edge.getEnd());
+                    stack.push(edge.getEnd()); // Push to stack for further exploration
+                }
+            }
+        }
+        return result.toString();
+    } // end of DFSTraversal method
+} // end of Traversal class

@@ -42,4 +42,3 @@ public class Edge {
         return false;
     } // end of equals
 } // end of Edge
-

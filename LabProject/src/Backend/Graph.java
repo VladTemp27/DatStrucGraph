@@ -27,4 +27,3 @@ public class Graph {
         return vertexList;
     } // end of getVertexList
 } // end of Graph class
-
